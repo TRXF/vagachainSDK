@@ -1,6 +1,6 @@
 {
   "name": "@vagachain/sdk",
-  "version": "0.2.31",
+  "version": "0.2.32",
   "description": "The Official Vagabond Javascript SDK written in Typescript",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -14,6 +14,10 @@
     "dev": "ts-node ./test/test_index.ts",
     "build": "tsc --module commonjs"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TRXF/vagachainSDK.git"
+  },
   "keywords": [
     "vagabond",
     "vagachain",
@@ -22,6 +26,9 @@
   ],
   "author": "VagaChain <hello@vagabondapp.io>",
   "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/FirmaChain/firma-js/issues"
+  },
   "homepage": "https://vagabondapp.io",
   "dependencies": {
     "@cosmjs/amino": "^0.26.0",
