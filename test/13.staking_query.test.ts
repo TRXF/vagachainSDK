@@ -1,0 +1,99 @@
+import { expect } from 'chai';
+import { VagaSDK } from "../sdk/VagaSDK"
+import { aliceMnemonic, bobMnemonic, TestChainConfig, validatorMnemonic } from './config_test';
+
+describe('[13. Staking Query Test]', () => {
+
+	const vaga = new VagaSDK(TestChainConfig);
+
+	it('1.get total validator list', async () => {
+
+		var result = await vaga.Staking.getValidatorList();
+		//console.log(result);
+	})
+
+	it('2.get validator data', async () => {
+
+		var validatorList = await vaga.Staking.getValidatorList();
+		var result = await vaga.Staking.getValidator(validatorList[0].operator_address);
+		//console.log(result);
+	})
+
+	it('3.get getDelegationListFromValidator', async () => {
+
+		var validatorList = await vaga.Staking.getValidatorList();
+		var result = await vaga.Staking.getDelegationListFromValidator(validatorList[0].operator_address);
+		//console.log(result);
+	})
+
+	it('4.get getUndelegationListFromValidator', async () => {
+
+		var validatorList = await vaga.Staking.getValidatorList();
+		var result = await vaga.Staking.getUndelegationListFromValidator(validatorList[0].operator_address);
+
+		//console.log(result);
+	})
+
+	// param side
+	it('5.get staking total pool', async () => {
+
+		var result = await vaga.Staking.getPool();
+
+		// bonded_token, not_bonded_tokens
+		//console.log(result);
+	})
+
+
+	it('6.get getParams', async () => {
+
+		var result = await vaga.Staking.getParams();
+		//console.log(result);
+	})
+
+	// user side
+	it('7.get userside getTotalDelegationInfo', async () => {
+
+		const wallet = await vaga.Wallet.fromMnemonic(aliceMnemonic);
+		var result = await vaga.Staking.getTotalDelegationInfo(await wallet.getAddress());
+
+		//console.log(result);
+	})
+
+	it('8.get userside getTotalRedelegationInfo', async () => {
+
+		const wallet = await vaga.Wallet.fromMnemonic(aliceMnemonic);
+		var result = await vaga.Staking.getTotalRedelegationInfo(await wallet.getAddress());
+
+		//console.log(result);
+	})
+
+	it('9.get userside getTotalUndelegateInfo', async () => {
+
+		const wallet = await vaga.Wallet.fromMnemonic(aliceMnemonic);
+		var result = await vaga.Staking.getTotalUndelegateInfo(await wallet.getAddress());
+
+		//console.log(result);
+	})
+
+	it('10.get userside getDelegationInfoFromValidator', async () => {
+
+		var validatorList = await vaga.Staking.getValidatorList();
+
+		const wallet = await vaga.Wallet.fromMnemonic(aliceMnemonic);
+		var result = await vaga.Staking.getDelegationInfoFromValidator(await wallet.getAddress(), validatorList[0].operator_address);
+
+		// If there is no data in the list, throw 404 exception.
+		//console.log(result);
+	})
+
+	it('11.get userside getUndelegationInfoFromValidator', async () => {
+
+		var validatorList = await vaga.Staking.getValidatorList();
+		const wallet = await vaga.Wallet.fromMnemonic(aliceMnemonic);
+
+		var result = await vaga.Staking.getUndelegationInfoFromValidator(await wallet.getAddress(), validatorList[0].operator_address);
+
+		// If there is no data in the list, throw 404 exception.
+		//console.log(result);
+	})
+});
